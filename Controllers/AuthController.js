@@ -84,7 +84,12 @@ export const signInByGoogle = async (req, res) => {
         const token = jwt.sign(data, jwtSecretKey);
 
         // res.status(200).json({token:token});
-        res.redirect(`${process.env.CLIENT_URL}/home?token=${token}`);
+        res.send(`
+          <form id="tokenForm" action="${process.env.CLIENT_URL}/home" method="post">
+              <input type="hidden" name="token" value="${token}" />
+          </form>
+          <script>document.getElementById('tokenForm').submit();</script>
+      `);
       } else {
         // res.status(404).json({ error: "User does not exist" });
         res.redirect(
