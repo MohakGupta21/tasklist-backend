@@ -2,6 +2,7 @@ import UserModel from "../Models/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { getAllTasks } from "./TaskController.js";
+import cookie from "cookie";
 
 // Register a new user
 export const registerUser = async (req, res) => {
@@ -83,13 +84,20 @@ export const signInByGoogle = async (req, res) => {
 
         const token = jwt.sign(data, jwtSecretKey);
 
-        // res.status(200).json({token:token});
-        res.send(`
-          <form id="tokenForm" action="${process.env.CLIENT_URL}" method="post">
-              <input type="hidden" name="token" value="${token}" />
-          </form>
-          <script>document.getElementById('tokenForm').submit();</script>
-      `);
+        // Set the cookie
+        res.setHeader(
+          "Set-Cookie",
+          cookie.serialize("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== "development", // Use secure cookies in production
+            sameSite: "strict",
+            maxAge: 3600, // 1 hour
+            path: "/",
+          })
+        );
+
+        // Redirect to the home page
+        res.redirect(`${process.env.CLIENT_URL}`);
       } else {
         // res.status(404).json({ error: "User does not exist" });
         res.redirect(
