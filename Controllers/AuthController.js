@@ -84,20 +84,20 @@ export const signInByGoogle = async (req, res) => {
 
         const token = jwt.sign(data, jwtSecretKey);
 
-        // Set the cookie
-        res.setHeader(
-          "Set-Cookie",
-          cookie.serialize("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV !== "development", // Use secure cookies in production
-            sameSite: "strict",
-            maxAge: 3600, // 1 hour
-            path: "/",
-          })
-        );
+        // // Set the cookie
+        // res.setHeader(
+        //   "Set-Cookie",
+        //   cookie.serialize("token", token, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV !== "development", // Use secure cookies in production
+        //     sameSite: "strict",
+        //     maxAge: 3600, // 1 hour
+        //     path: "/",
+        //   })
+        // );
 
         // Redirect to the home page
-        res.redirect(`${process.env.CLIENT_URL}`);
+        res.redirect(`${process.env.CLIENT_URL}?token=${token}`);
       } else {
         // res.status(404).json({ error: "User does not exist" });
         res.redirect(
