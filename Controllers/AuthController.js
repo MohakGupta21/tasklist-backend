@@ -99,9 +99,10 @@ export const signInByGoogle = async (req, res) => {
         // Redirect to the home page
         res.redirect(`${process.env.CLIENT_URL}?token=${token}`);
       } else {
+         const msg="User Does Not Exist"
         // res.status(404).json({ error: "User does not exist" });
         res.redirect(
-          `${process.env.CLIENT_URL}/login?message=User Does Not Exist`
+          `${process.env.CLIENT_URL}/login?message=${msg}`
         );
       }
     } catch (error) {
@@ -112,7 +113,8 @@ export const signInByGoogle = async (req, res) => {
       );
     }
   } else {
-    res.redirect(`${process.env.CLIENT_URL}/login?error=Not Authenticated`);
+    const x = "Not Authenticated";
+    res.redirect(`${process.env.CLIENT_URL}/login?error=${x}`);
   }
 };
 
