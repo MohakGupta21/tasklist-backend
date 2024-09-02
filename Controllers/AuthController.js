@@ -127,8 +127,9 @@ export const registerByGoogle = async (req, res) => {
     const existingUser = await UserModel.findOne({ email: email });
 
     if (existingUser) {
+      const msg = "Email Already Registered";
       res.redirect(
-        `${process.env.CLIENT_URL}/signup?message=Email Already Registered!`
+        `${process.env.CLIENT_URL}/signup?message=${msg}`
       );
     } else {
       const salt = await bcrypt.genSalt(10);
