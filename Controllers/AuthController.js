@@ -85,7 +85,7 @@ export const signInByGoogle = async (req, res) => {
 
         // res.status(200).json({token:token});
         res.send(`
-          <form id="tokenForm" action="${process.env.CLIENT_URL}/home" method="post">
+          <form id="tokenForm" action="${process.env.CLIENT_URL}" method="post">
               <input type="hidden" name="token" value="${token}" />
           </form>
           <script>document.getElementById('tokenForm').submit();</script>
