@@ -63,7 +63,7 @@ export const loginUser = async (req, res) => {
 
 export const signInByGoogle = async (req, res) => {
   if (req.user) {
-    console.log(req.user._json);
+    // console.log(req.user._json);
 
     const emailVal = req.user._json.email;
     try {
@@ -105,7 +105,7 @@ export const signInByGoogle = async (req, res) => {
 
 export const registerByGoogle = async (req, res) => {
   if (req.user) {
-    console.log("Inside register!!");
+    // console.log("Inside register!!");
     // console.log(req.user._json);
     const { given_name, family_name, email, sub } = req.user._json;
 

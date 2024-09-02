@@ -13,7 +13,7 @@ export const createTask = async(req,res)=>{
         const newTask = new TaskModel({title,desc,status,userId:user._id,createdAt:now})
         const taskObject = newTask.toObject();
         const {userId,...otherDetails} = taskObject;
-        console.log(otherDetails);
+        // console.log(otherDetails);
         try {
             await newTask.save();
 
@@ -55,17 +55,17 @@ export const getAllTasks = async(user_id)=>{
 // update a Task
 export const updateTask = async(req,res)=>{
     const TaskId = req.params.id;
-    console.log(TaskId);
+    // console.log(TaskId);
     const {email,...other} = req.body;
-    console.log(other);
+    // console.log(other);
     // console.log(email);
     const user = await UserModel.findOne({email:email})
     // console.log(user);
     try {
 
         const Task = await TaskModel.findById(TaskId);
-        console.log(Task.userId);
-        console.log(user._id.toString());
+        // console.log(Task.userId);
+        // console.log(user._id.toString());
         if(user._id.toString() === Task.userId){
             await Task.updateOne({$set : other})
 
