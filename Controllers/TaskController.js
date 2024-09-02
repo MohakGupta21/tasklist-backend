@@ -45,7 +45,7 @@ export const getAllTasks = async(user_id)=>{
 
     try {
         const task = await TaskModel.find({userId:user_id}).select('-userId');
-        console.log(task);
+        // console.log(task);
         return task;
     } catch (error) {
         throw error;
