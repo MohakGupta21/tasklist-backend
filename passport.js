@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: "https://tasklist-backend-0u3k.onrender.com/auth/google/callback",
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -26,7 +26,7 @@ passport.use(
       {
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "/auth/google/register/callback",
+        callbackURL: "https://tasklist-backend-0u3k.onrender.com/auth/google/register/callback",
         scope: ["profile", "email"],
       },
       async (accessToken, refreshToken, profile, done) => {
