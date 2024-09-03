@@ -160,26 +160,3 @@ export const deleteTask = async(req,res)=>{
       res.status(500).json({error:error.message});
     }
 }
-
-export const getTask = async(req,res)=>{
-    const taskId = req.params.id;
-    const email = req.query.email;
-
-    const user = await UserModel.findOne({email:email});
-
-    try {
-        const Task = await TaskModel.findById(taskId);
-        const {userId,...resp} = Task.toObject();
-        if(user._id.toString() === Task.userId){
-        
-            res.status(200).json(resp);
-        }
-        else{
-            res.status(500).json({message: 'user not found'})
-        }
-
-    } catch (error) {
-      res.status(500).send('Error getting task');
-    }
-
-}
