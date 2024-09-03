@@ -7,8 +7,12 @@ import cookie from "cookie";
 // Register a new user
 export const registerUser = async (req, res) => {
   const { firstname, lastname, password, confirm_password, email } = req.body;
+  const existingUser = await UserModel.findOne({email:email});
 
-  if (password == confirm_password) {
+  if(existingUser){
+    res.status(500).json({ message: "Email already registered!" });
+  }
+  else if (password == confirm_password) {
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
 
